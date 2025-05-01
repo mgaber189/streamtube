@@ -18,7 +18,7 @@ function MovieCard({ movies, vertical }) {
           alt={movies?.title}
           width={1920}
           height={1080}
-          className="w-fit min-w-[400px] h-56 object-cover shadow-md shadow-gray-900 drop-shadow-xl"
+          className="w-fit sm:min-w-[400px] min-w-[325px] h-56 object-cover shadow-md shadow-gray-900 drop-shadow-xl"
         />
       </div>
     </Link>
