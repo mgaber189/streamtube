@@ -2,7 +2,7 @@ import React from "react";
 import MovieCard from "./MovieCard";
 import { fetcher } from "@/lib/Fetcher";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 
 export default async function MovieContainer({
   title,

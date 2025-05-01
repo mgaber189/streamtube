@@ -18,7 +18,7 @@ export const fetcher = async (link, body) => {
       Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
     },
     next: {
-      revalidate: 0,
+      revalidate: false,
     },
   };
 
