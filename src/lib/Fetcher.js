@@ -1,7 +1,7 @@
 export const fetcher = async (link, body) => {
   const url = new URL(`https://api.themoviedb.org/3/${link}`);
 
-  // Better to use forEach instead of map
+  // Using forEach instead of map
   body?.forEach((e) => {
     url.searchParams.set(e.name, e.value);
   });
@@ -22,10 +22,23 @@ export const fetcher = async (link, body) => {
     },
   };
 
-  const response = await fetch(url.toString(), options);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(url.toString(), options);
+    
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Log the error or handle it as needed
+    console.error("Fetcher Error:", error.message);
+    throw new Error("An error occurred while fetching data."); // Re-throw the error
+  }
 };
+
 
 export const getImagePath = (imagePath, fullSize) => {
     return imagePath

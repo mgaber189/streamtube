@@ -25,7 +25,7 @@ async function DropDown() {
         <DropdownMenuSeparator />
         {data?.genres?.map((e) => {
           return (
-            <Link href={ { pathname:`/${e.id}/type/${e.name}`}} key={e?.id}>
+            <Link href={ { pathname:`/movies/${e.id}/type/${e.name}`}} key={e?.id}>
               <DropdownMenuItem key={e.id}>{e.name}</DropdownMenuItem>
             </Link>
           );
