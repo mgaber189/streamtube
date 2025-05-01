@@ -9,7 +9,7 @@ export default async function MovieContainer({
   isVertical,
   typeId,
   typeName,
-  search
+  search,
 }) {
   const page = 1;
   let endpoint = "";
@@ -27,7 +27,7 @@ export default async function MovieContainer({
     endpoint = "discover/movie";
     queryParams.push({ name: "with_genres", value: typeId });
   } else if (search) {
-    endpoint = "search/movi";
+    endpoint = "search/movie";
     queryParams.push({ name: "query", value: search });
   }
 
@@ -40,13 +40,12 @@ export default async function MovieContainer({
       data = await fetcher(endpoint, queryParams);
     }
   } catch (error) {
-      throw new Error("An error occurred while fetching movie data.");
+    console.log(error);
+    throw new Error("An error occurred while fetching movie data.");
   }
 
   if (!data || !data.results || data.results.length === 0) {
-    return (
-      notFound()
-    );
+    return notFound();
   }
 
   return (
@@ -62,9 +61,10 @@ export default async function MovieContainer({
         </p>
         {!title?.includes("type") && (
           <Link
-            href={{ pathname: `/movies/viewmore/${title?.replace(/\s+/g, "-")}` }}
-            className="bg-gray-800 text-sm text-white uppercase px-5 py-3 rounded-md border-indigo-600 font-semibold hover:bg-black duration-300"
-          >
+            href={{
+              pathname: `/movies/viewmore/${title?.replace(/\s+/g, "-")}`,
+            }}
+            className="bg-gray-800 text-sm text-white uppercase px-5 py-3 rounded-md border-indigo-600 font-semibold hover:bg-black duration-300">
             View more
           </Link>
         )}
@@ -76,8 +76,7 @@ export default async function MovieContainer({
           {data.results.map((movie) => (
             <div
               className="flex flex-col lg:flex-row items-center gap-5 w-11/12 2xl:w-7/12"
-              key={movie.id}
-            >
+              key={movie.id}>
               <MovieCard movies={movie} />
               <div className="flex flex-col">
                 <div className="relative border-b border-b-gray-600 mb-5 w-full">
